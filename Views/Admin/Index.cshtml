@@ -1,0 +1,164 @@
+﻿<script>
+    document.getElementById("home").classList.add("active");
+</script>
+<body>
+    <div class="container-fluid bg-soft">
+        <div class="row">
+            <div class="col-12">
+
+                <main class="content">
+
+                    <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark pl-0 pr-2 pb-0">
+                        <div class="container-fluid px-0">
+                            <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
+                                <div class="d-flex">
+                                </div>
+                                <!-- Navbar links -->
+                                <ul class="navbar-nav align-items-center">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link pt-1 px-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="media d-flex align-items-center">
+                                                @*<img class="user-avatar md-avatar rounded-circle" alt="Image placeholder" src="~/volt-v1.0.1-themesberg/html&css/assets/img/team/profile-picture-3.jpg">*@
+                                                <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
+                                                    <span class="mb-0 font-small font-weight-bold">@Session["Admin"] 管理員模式</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        @*<div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
+                                                <a class="dropdown-item font-weight-bold" href="#"><span class="far fa-user-circle"></span>My Profile</a>
+                                                <a class="dropdown-item font-weight-bold" href="#"><span class="fas fa-cog"></span>Settings</a>
+                                                <a class="dropdown-item font-weight-bold" href="#"><span class="fas fa-envelope-open-text"></span>Messages</a>
+                                                <a class="dropdown-item font-weight-bold" href="#"><span class="fas fa-user-shield"></span>Support</a>
+                                                <div role="separator" class="dropdown-divider"></div>
+                                                <a class="dropdown-item font-weight-bold" href="@Url.Action("Logout","Login")"><span class="fas fa-sign-out-alt text-danger"></span>Logout</a>
+                                            </div>*@
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="jumbotron">
+                        <h1>歡迎來到管理員模式!</h1>
+                        <p>
+                            <b>管理員 @Session["Admin"]</b> 在這裡你可以查看所有的訂單，管理會員的資料，編輯架上的商品，更重要的是這很酷!
+                        </p>
+                        <br />
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header d-flex flex-row align-items-center flex-0">
+                                <div class="d-block">
+                                    <div class="h5 font-weight-bold mb-2">總受理資產額</div>
+                                    <h3>
+                                        <span class="text-success mb-1">0000 $ </span>
+                                        <small class="h5">≈ 0000@*@((string)(@ViewBag.TotalAsset*28).ToString("C"))*@</small>
+                                    </h3>
+                                    <div class="small mt-2">
+                                        <span class="font-weight-bold mr-2">僅統計基金型、定存型進行中方案訂單</span>
+                                        @*<span class="fas fa-angle-up text-success"></span>*@
+                                        @*<span class="text-success font-weight-bold">10.57%</span>*@
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="card-body p-2">
+                                    <div class="ct-chart-sales-value ct-double-octave ct-series-g"><div class="chartist-tooltip" style="top: 145.8px; left: 255px;"><span class="chartist-tooltip-value">30</span></div><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-line" style="width: 100%; height: 100%;"><g class="ct-grids"><line x1="50" x2="50" y1="15" y2="267.3000183105469" class="ct-grid ct-horizontal"></line><line x1="240.70001220703125" x2="240.70001220703125" y1="15" y2="267.3000183105469" class="ct-grid ct-horizontal"></line><line x1="431.4000244140625" x2="431.4000244140625" y1="15" y2="267.3000183105469" class="ct-grid ct-horizontal"></line><line x1="622.1000366210938" x2="622.1000366210938" y1="15" y2="267.3000183105469" class="ct-grid ct-horizontal"></line><line x1="812.800048828125" x2="812.800048828125" y1="15" y2="267.3000183105469" class="ct-grid ct-horizontal"></line><line x1="1003.5000610351562" x2="1003.5000610351562" y1="15" y2="267.3000183105469" class="ct-grid ct-horizontal"></line><line x1="1194.2000732421875" x2="1194.2000732421875" y1="15" y2="267.3000183105469" class="ct-grid ct-horizontal"></line></g><g><g class="ct-series ct-series-a"><path d="M50,267.3L50,267.3C113.567,258.89,177.133,253.283,240.7,242.07C304.267,230.857,367.833,202.823,431.4,191.61C494.967,180.397,558.533,179.836,622.1,166.38C685.667,152.924,749.233,65.46,812.8,65.46C876.367,65.46,939.933,115.92,1003.5,115.92C1067.067,115.92,1130.633,48.64,1194.2,15L1194.2,267.3Z" class="ct-area"></path><path d="M50,267.3C113.567,258.89,177.133,253.283,240.7,242.07C304.267,230.857,367.833,202.823,431.4,191.61C494.967,180.397,558.533,179.836,622.1,166.38C685.667,152.924,749.233,65.46,812.8,65.46C876.367,65.46,939.933,115.92,1003.5,115.92C1067.067,115.92,1130.633,48.64,1194.2,15" class="ct-line"></path><line x1="50" y1="267.3000183105469" x2="50.01" y2="267.3000183105469" class="ct-point" ct:value="0"></line><line x1="240.70001220703125" y1="242.07001647949218" x2="240.71001220703124" y2="242.07001647949218" class="ct-point" ct:value="10"></line><line x1="431.4000244140625" y1="191.61001281738282" x2="431.4100244140625" y2="191.61001281738282" class="ct-point" ct:value="30"></line><line x1="622.1000366210938" y1="166.38001098632813" x2="622.1100366210937" y2="166.38001098632813" class="ct-point" ct:value="40"></line><line x1="812.800048828125" y1="65.46000366210939" x2="812.810048828125" y2="65.46000366210939" class="ct-point" ct:value="80"></line><line x1="1003.5000610351562" y1="115.92000732421874" x2="1003.5100610351562" y2="115.92000732421874" class="ct-point" ct:value="60"></line><line x1="1194.2000732421875" y1="15" x2="1194.2100732421875" y2="15" class="ct-point" ct:value="100"></line></g></g><g class="ct-labels"><foreignObject style="overflow: visible;" x="50" y="272.3000183105469" width="190.70001220703125" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 191px; height: 20px;">Mon</span></foreignObject><foreignObject style="overflow: visible;" x="240.70001220703125" y="272.3000183105469" width="190.70001220703125" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 191px; height: 20px;">Tue</span></foreignObject><foreignObject style="overflow: visible;" x="431.4000244140625" y="272.3000183105469" width="190.70001220703125" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 191px; height: 20px;">Wed</span></foreignObject><foreignObject style="overflow: visible;" x="622.1000366210938" y="272.3000183105469" width="190.70001220703125" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 191px; height: 20px;">Thu</span></foreignObject><foreignObject style="overflow: visible;" x="812.800048828125" y="272.3000183105469" width="190.70001220703125" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 191px; height: 20px;">Fri</span></foreignObject><foreignObject style="overflow: visible;" x="1003.5000610351562" y="272.3000183105469" width="190.70001220703125" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 191px; height: 20px;">Sat</span></foreignObject><foreignObject style="overflow: visible;" x="1194.2000732421875" y="272.3000183105469" width="30" height="20"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 30px; height: 20px;">Sun</span></foreignObject></g></svg></div>
+                                </div>*@
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-md-center">
+
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-light shadow-sm">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon icon-shape icon-md icon-shape-blue rounded mr-4 mr-sm-0">
+                                                <span class="fas fa-user"></span>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="h5">總會員數</h2>
+                                                <h3 class="mb-1">0000</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h5">總會員數</h2>
+                                                <h3 class="mb-1">0000</h3>
+                                            </div>
+                                            <small>Feb 1 - Apr 1,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> WorldWide</small>
+                                            <div class="small mt-2">
+                                                <span class="fas fa-angle-up text-success"></span>
+                                                <span class="text-success font-weight-bold">18.2%</span> Since last month
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-light shadow-sm">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="icon icon-shape icon-md icon-shape-secondary rounded mr-4">
+                                                <span class="fas fa-cash-register"></span>
+                                            </div>
+                                            <div class="d-sm-none">
+                                                <h2 class="h5">Revenue</h2>
+                                                <h3 class="mb-1">$43,594</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <div class="d-none d-sm-block">
+                                                <h2 class="h5">Revenue</h2>
+                                                <h3 class="mb-1">$43,594</h3>
+                                            </div>
+                                            <small>Feb 1 - Apr 1,  <span class="icon icon-small"><span class="fas fa-globe-europe"></span></span> Worldwide</small>
+                                            <div class="small mt-2">
+                                                <span class="fas fa-angle-up text-success"></span>
+                                                <span class="text-success font-weight-bold">28.2%</span> Since last month
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4 mb-4">
+                            <div class="card border-light shadow-sm">
+                                <div class="card-body">
+                                    <div class="row d-block d-xl-flex align-items-center">
+                                        <div class="col-12 col-xl-5 text-xl-center mb-3 mb-xl-0 d-flex align-items-center justify-content-xl-center">
+                                            <div class="ct-chart-traffic-share ct-golden-section ct-series-a">
+                                                <div class="chartist-tooltip"></div>
+                                                <svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-donut" style="width: 100%; height: 100%;"><g class="ct-series ct-series-a"><path d="M31.33,50.611A34.844,34.844,0,1,0,64.469,5L64.469,25A14.844,14.844,0,1,1,50.352,44.431Z" class="ct-slice-donut-solid" ct:value="70"></path></g><g class="ct-series ct-series-b"><path d="M43.988,11.655A34.844,34.844,0,0,0,31.368,50.727L50.368,44.48A14.844,14.844,0,0,1,55.744,27.835Z" class="ct-slice-donut-solid" ct:value="20"></path></g><g class="ct-series ct-series-c"><path d="M64.469,5A34.844,34.844,0,0,0,43.89,11.726L55.702,27.865A14.844,14.844,0,0,1,64.469,25Z" class="ct-slice-donut-solid" ct:value="10"></path></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-xl-7 px-xl-0">
+                                            <h2 class="h5 mb-3">Traffic Share</h2>
+                                            <h6 class="font-weight-normal text-gray">
+                                                <span class="icon w-20 icon-xs icon-secondary mr-1"><span class="fas fa-desktop"></span></span> Desktop
+                                                <a href="#" class="h6">60%</a>
+                                            </h6>
+                                            <h6 class="font-weight-normal text-gray">
+                                                <span class="icon w-20 icon-xs icon-primary mr-1"><span class="fas fa-mobile-alt"></span></span> Mobile Web
+                                                <a href="#" class="h6">30%</a>
+                                            </h6>
+                                            <h6 class="font-weight-normal text-gray">
+                                                <span class="icon w-20 icon-xs icon-tertiary mr-1"><span class="fas fa-tablet-alt"></span></span> Tablet Web
+                                                <a href="#" class="h6">10%</a>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,191 @@
+﻿
+<body>
+    <div class="content-wrapper">
+        <section class="wrapper bg-dark-img">
+            <div class="container pt-10 pb-12 pt-md-14 pb-md-12 text-center">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="display-1 mb-3 text-white">權益質押</h1>
+                        <h2 class="text-white">最安全穩定的高收益理財方式</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="wrapper bg-light-team pb-lg-12">
+            <div class="container pt-5">
+                <div class="row align-items-center mb-10 mb-lg-5">
+                    <div class="col-lg-7 text-center text-lg-start">
+                        <h2 class="fs-16 text-uppercase text-muted mb-3">STAKING AND SAVE TIME</h2>
+                        <h3 class="display-3 mb-0 pe-xl-10 pe-xxl-15">質押代幣，輕鬆享受穩定收益。</h3>
+                    </div>
+                    <!-- /column -->
+                    <div class="col-lg-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2>我的活期帳戶</h2>
+                                        <small>總資產</small>
+                                        <h5>
+                                            <span class="h2 font-weight-bolder" style="font-size:35px;font-weight:600;"><img style="height:40px" src="~/Template/Front/image/icons/BEEWiN Coin.png" alt="" /> &nbsp;@TempData["Current"]</span> BWC
+                                            <br />
+                                            <span class="font-weight-bold mr-2 small mt-3">&nbsp;≈ @TempData["CurrentTWD"] TWD</span>
+                                        </h5>
+                                        @if (Session["Member"] != null)
+                                        {
+                                            <a class="nav-link btn btn-sm btn-blue rounded" style="width:100%" data-bs-toggle="modal" data-bs-target="#testpay">兌幣儲值</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="nav-link btn btn-sm btn-blue rounded" style="width:100%" data-bs-toggle="modal" data-bs-target="#modal-login">兌幣儲值</a>
+                                        }
+                                    </div>
+                                    <!--/.card-body -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /column -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+        </section>
+
+        <section class="wrapper bg-gradient-blue">
+            <div class="container py-14-team py-md-16">
+                <div class="row gx-lg-8-w gx-xl-12 gy-10 align-items-center">
+
+                    <!-- /section -->
+                    <div class="container">
+                        <div class="text-center text-lg-start">
+                            <h2 class="fs-16 text-uppercase text-muted mb-3">-BEEWiN COIN Staking</h2>
+                            <h3 class="display-3 pe-xl-10 mb-16 mb-lg-5">BWC 必盈幣質押</h3>
+                        </div>
+                        <br />
+                        <div class="pricing-wrapper-pre position-relative mt-n22 mt-md-n24">
+                            <div class="shape bg-dot primary rellax w-16 h-18" data-rellax-speed="1"
+                                 style="top: 2rem; right: -2.4rem;"></div>
+                            <div class="shape rounded-circle bg-line red rellax w-18 h-18 d-none d-lg-block"
+                                 data-rellax-speed="1" style="bottom: 0.5rem; left: -2.5rem;"></div>
+                            <div class="row gy-6 mt-3 mt-md-5-1">
+                                @foreach (var i in ViewBag.BWC)
+                                {
+                                    <div class="col-md-6 col-lg-3">
+                                        <div class="pricing card shadow-lg text-center">
+                                            <div class="card-body" id="modal">
+                                                <img src="@i.Icon"
+                                                     class="svg-inject icon-svg icon-svg-md text-primary mb-3" alt="" />
+                                                <div><span class="h1 text-gradient">@i.ARP%</span><small> &nbsp;APY</small></div>
+                                                <h3>@i.SName</h3>
+                                                <hr class="my-5">
+                                                <ul class="icon-list bullet-bg bullet-soft-primary mt-5 mb-9 text-start">
+                                                    <li>
+                                                        <i class="uil uil-check"></i>
+                                                        <small class="text-end">最低門檻:</small>
+                                                        <br />
+                                                        <span>@i.SPrice.ToString("N0") BWC</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="uil uil-clock"></i>
+                                                        <small class="text-end">質押期限:</small>
+                                                        <br />
+                                                        <span>@i.Offering_Day 日</span>
+                                                    </li>
+                                                    <hr class="my-2">
+                                                    <li>
+                                                        <i class="uil uil-coins"></i>
+                                                        <small class="text-end">已質押總數:</small>
+                                                        <br />
+                                                        <span>@i.Capital_Size.ToString("N0") BWC</span>
+                                                    </li>
+                                                </ul>
+                                                @if (Session["Member"] != null)
+                                                {
+                                                    <a class="nav-link btn btn-sm btn-blue rounded" style="width:100%" data-bs-toggle="modal" data-bs-target="#@i.SId">立即質押</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="nav-link btn btn-sm btn-blue rounded" style="width:100%" data-bs-toggle="modal" data-bs-target="#modal-login">立即質押</a>
+                                                }
+                                            </div>
+                                            <!--/.card-body -->
+                                        </div>
+                                        <!--/.pricing -->
+                                    </div>
+
+                                }
+                            </div>
+
+                        </div>
+                        <!--/.pricing-wrapper -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.container -->
+        </section>
+    </div>
+
+    <model>
+        @foreach (var i in ViewBag.BWC)
+        {
+            <div class="modal fade" id="@i.SId" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content ">
+                        <div class="modal-body">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h3 class="mb-4">訂單確認</h3>
+                            <hr class="my-2">
+                            <h3><span class="h1 text-gradient">@i.ARP%</span><br /> @i.SName</h3>
+                            <div class="alert" style="background-color: #f5f5f5; margin-bottom:5px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <small>計息起始時間</small>
+                                    <small>@DateTime.Now.ToString("d") 00:00</small>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <small>計息發放時間</small>
+                                    <small>@DateTime.Now.AddYears(1).ToString("d") 00:00</small>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <small>質押時長</small>
+                                    <small>@i.Offering_Day 日</small>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <small>年化收益率</small>
+                                    <small class="text-gradient">@i.ARP%</small>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; ">
+                                <span>可用餘額: <strong style="color: #343f52;">@TempData["Current"] BWC <img style="height:20px" src="~/Template/Front/image/icons/BEEWiN Coin.png" alt="" /></strong></span>
+                                <a class="text-gold">儲值</a>
+                            </div>
+
+                            <form class="text-start mt-1 mb-3" action="@Url.Action("Register", "Account")" method="post">
+                                <div class="form-group form-label-group mb-3">
+                                    <input type="number" min="@i.SPrice" value="@i.SPrice.ToString("F0")" class="form-control" name="amount" required>
+                                    <label for="amount"> 質押數量 (最低 @i.SPrice.ToString("N0") BWC)</label>
+                                </div>
+                            </form>
+
+                            <div class="alert" style="background-color: #f5f5f5; margin-bottom:5px;">
+                                <div style="display: flex; justify-content: space-between; ">
+                                    <span>質押到期收益</span>
+                                    <strong class="text-success">100.00 BWC</strong>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button style="width:100%" type="submit" class="btn btn-primary w-100">立即質押</button>
+                            </div>
+                        </div>
+                        <!--/.modal-content -->
+                    </div>
+                    <!--/.modal-body -->
+                </div>
+                <!--/.modal-dialog -->
+            </div>
+        }
+    </model>
+    
+</body>

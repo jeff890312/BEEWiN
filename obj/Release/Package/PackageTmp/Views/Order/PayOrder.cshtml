@@ -1,0 +1,186 @@
+﻿@model BEEWiN.Models.CoinOrder
+<script>
+    function replace(hide, hideq, show, showq) {
+        document.getElementById(hide).style.display = "none";
+        document.getElementById(hideq).style.display = "none";
+        document.getElementById(show).style.display = "";
+        document.getElementById(showq).style.display = "";
+    }
+
+    function Agree(c) {
+
+        if (c.checked) {
+            document.getElementById("topay").classList.remove("disabled");
+            document.getElementById('topay').style.backgroundColor = "#cab380";
+            document.getElementById('topay').style.borderColor = "#cab380";
+        } else {
+            document.getElementById("topay").classList.add('disabled');
+            document.getElementById('topay').style.backgroundColor = "darkgrey";
+            document.getElementById('topay').style.borderColor = "darkgrey";
+        }
+    }
+</script>
+<body>
+    <div class="content-wrapper">
+        <div style="background-color:#1f273a" class="modal modal-popup fade " id="modal-02" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content text-center">
+                    <div class="modal-body">
+                        @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+
+                        <script>
+                            function copyEvent(id) {
+                                var str = document.getElementById(id);
+                                window.getSelection().selectAllChildren(str);
+                                document.execCommand("Copy");
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: '複製成功',
+                                    text: '',
+                                    showConfirmButton: false,
+                                    timer: 1000,
+                                    width: 400,
+                                });
+                            }
+                        </script>
+                        <style>
+                            .copy1 {
+                                background-image: url('../../Template/Front/image/copy.svg');
+                                width: 24px;
+                                height: 24px;
+                                border: none;
+                                background-color: transparent;
+                            }
+                        </style>
+
+                        <div class="row">
+                            <h3>申購付款步驟</h3>
+                            <p style="margin:0 auto;">請將款項轉入下列地址<br />我們將於一日內進行對帳</p>
+
+                            <a class="btn btn-primary-add rounded-pill btn-login w-100 mb-2" onclick="replace('TRC20','TRC20Q','ERC20','ERC20Q')">ERC20</a>
+                            <a class="btn btn-primary-add2 rounded-pill btn-login w-100 mb-2" onclick="replace('ERC20','ERC20Q','TRC20','TRC20Q')">TRC20</a>
+
+                            <p id="TRC20" style="margin-top: 1rem;">TX3RRyEbELcDoEq42CMK57AJ3yQmKdpAeq<input type="button" onclick="copyEvent('TRC20')" class="copy1" /></p>
+                            <div id="TRC20Q" class="col-md-10 offset-md-1">
+                                <figure class="mb-6">
+                                    <img src="https://imgur.com/RhyDYXb.jpg" alt="" />
+                                </figure>
+                            </div>
+
+                            <p id="ERC20" style="margin-top: 1rem; display:none">0x2cf76c7f57c4176c4d32a44f310bb387c6182aee<input type="button" onclick="copyEvent('ERC20')" class="copy1" /></p>
+                            <div id="ERC20Q" class="col-md-10 offset-md-1" style="display: none">
+                                <figure class="mb-6">
+                                    <img src="https://i.imgur.com/GsR1X9N.jpg" alt="" />
+                                </figure>
+                            </div>
+
+                            <!-- /column -->
+                        </div>
+                        <!-- /.row -->
+
+                        <table class="table">
+                            <tbody>
+                                <tr style="color: rgb(110, 110, 110); font-weight: 400;">
+                                    <th scope="row"><h2>BEEWiN</h2></th>
+                                </tr>
+                                <tr style="color: rgb(110, 110, 110); font-weight: 400;">
+                                    <th scope="row">
+                                        申購單位 <span class="text-success">@TempData["Amount"]</span> x 當前價格 <span class="text-success">@TempData["Price"] USDT</span>
+                                        <h2 class="text-success">應付金額 @TempData["Total"] USDT</h2>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="newsletter-wrapper">
+                            <div class="row">
+                                <div class="col-md-10 offset-md-1-pop">
+                                    <!-- Begin Mailchimp Signup Form -->
+                                    <div id="mc_embed_signup">
+                                        <form action="@Url.Action("addorder","order")"
+                                              method="post" id="mc-embedded-subscribe-form"
+                                              name="mc-embedded-subscribe-form" class="validate"
+                                              novalidate>
+                                            <div class="form-group">
+                                                <input type="hidden" name="amount" value="@TempData["Amount"]" required="required" class="form-control" />
+                                                <input type="hidden" name="symbol" value="@TempData["Symbol"]" required="required" hidden class="form-control" />
+                                            </div>
+                                            <input class="form-check-input" onchange="Agree(this);" type="checkbox" checked> 我已詳閱並同意<a href="" data-bs-toggle="modal" data-bs-target="#modal-book">申購權益說明書</a>
+                                            <div id="mc_embed_signup_scroll">
+                                                <a class="btn btn-primary-can rounded-pill btn-login w-100 mb-2" href="@Url.Action("beewincoin","bwc")">取消</a>
+                                                <button id="topay" type="submit" class="btn btn-primary-next rounded-pill btn-login w-100 mb-2">確認付款</button>
+                                                <div id="mce-responses" class="clear">
+                                                    <div class="response" id="mce-error-response" style="display:none">
+                                                    </div>
+                                                    <div class="response" id="mce-success-response"
+                                                         style="display:none">
+                                                    </div>
+                                                </div>
+                                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                                    <input type="text" name="b_ddc180777a163e0f9f66ee014_4b1bcfa0bc"
+                                                           tabindex="-1" value="">
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!--End mc_embed_signup-->
+                                </div>
+                                <!-- /.newsletter-wrapper -->
+                            </div>
+                            <!-- /column -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!--/.modal-body -->
+                </div>
+                <!--/.modal-content -->
+            </div>
+            <!--/.modal-dialog -->
+        </div>
+        <!--/.modal -->
+        <!--/.row -->
+    </div>
+    <!-- /.container -->
+</body>
+
+<!-- 申購權益說明書 -->
+<div class="modal fade" id="modal-book" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h2>申購權益說明書</h2>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="newsletter-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            A.投資人應了解投資之風險
+                            <br />
+                            應考量的風險因素包括：
+                            市場、流動性、政治、匯率投資、法令、違約風險等，任何商品單位之淨值均可能上漲或下跌。
+                            商品投資目標主要為追求長期之獲利，不宜期待於短期內獲取高收益。
+                            <br /><br />
+                            1、商品之買賣係以自己之判斷為之。
+                            <br />
+                            2、各商品之資產價值，可能因政府政策、稅務條例、貨幣往返原因之限制，及其他平台的規範、條例有變。
+                            <br />
+                            3、本風險預告書之預告事項僅列舉，對於以上所列各項風險預告書之風險及影響市場行情之因素無法一一詳述，投資人於交易前除需對風險預告書及公開說明書詳加研判外，對其他可能之影響因素亦應有所警覺，並確實做好財務規劃與風險評估。
+                            <br /><br />
+                            B.必盈網資產安全
+                            <br />
+                            必盈網與全球最大交易所[幣安Binance]合作，確保用戶資產安全
+                        </div>
+                        <!-- /.newsletter-wrapper -->
+                        <button type="button" class="btn btn-primary-can rounded-pill btn-login w-100 mb-2" data-bs-dismiss="modal" aria-label="Close">我已了解</button>
+                    </div>
+                    <!-- /column -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!--/.modal-body -->
+        </div>
+        <!--/.modal-content -->
+    </div>
+    <!--/.modal-dialog -->
+</div>

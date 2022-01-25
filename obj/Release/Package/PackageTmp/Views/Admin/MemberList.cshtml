@@ -1,0 +1,109 @@
+﻿<script>
+    document.getElementById("member").classList.add("active");
+    document.getElementById("submenu-app").classList.add("show");
+</script>
+<body>
+    <div class="container-fluid bg-soft">
+        <div class="row">
+            <div class="col-12">
+
+                <main class="content">
+
+                    <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark pl-0 pr-2 pb-0">
+                        <div class="container-fluid px-0">
+                            <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
+                                <div class="d-flex">
+                                </div>
+                                <!-- Navbar links -->
+                                <ul class="navbar-nav align-items-center">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link pt-1 px-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="media d-flex align-items-center">
+                                                @*<img class="user-avatar md-avatar rounded-circle" alt="Image placeholder" src="~/volt-v1.0.1-themesberg/html&css/assets/img/team/profile-picture-3.jpg">*@
+                                                <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
+                                                    <span class="mb-0 font-small font-weight-bold">@Session["Admin"] 管理員模式</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="jumbotron">
+                        <h1>顧客資料管理</h1>
+                    </div>
+
+
+                    <div class="table-settings mb-4">
+                        <div class="row align-items-center justify-content-between">
+
+                            <div class="col col-md-6 col-lg-6 col-xl-6">
+                                <form action="@Url.Action("memberlist","admin")" method="post">
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon2"><span class="fas fa-search"></span></span>
+                                        <input type="text" class="form-control" name="searchString" id="exampleInputIconLeft" placeholder="請輸入Email" aria-label="Search" aria-describedby="basic-addon2">
+                                        <select name="status" class="form-select fmxw-200 d-none d-md-inline">
+                                            <option selected="selected" value="0">全部</option>
+                                            <option value="1">未付款</option>
+                                            <option value="2">進行中</option>
+                                            <option value="3">取消</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary">查詢<span class="fas fa-search ml-2"></span> </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>選項</th>
+                                        <th>類別</th>
+                                        <th>帳號</th>
+                                        <th>暱稱</th>
+                                        <th>手機</th>
+                                        <th>國家</th>
+                                        <th>註冊日</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Item -->
+                                    @foreach (var item in ViewBag.SelectMemberlist)
+                                    {
+                                    <tr>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="icon icon-sm">
+                                                        <span class="fas fa-ellipsis-h icon-dark"></span>
+                                                    </span>
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    @*<a class="dropdown-item" href="../invoice.html"><span class="fas fa-eye mr-2"></span>會員詳情</a>*@
+                                                    <a class="dropdown-item" href="@Url.Action("ModifyMember","ModifyMember")?Email=@item.Email"><span class="fas fa-edit mr-2"></span>檢視編輯資料</a>
+                                                    <a class="dropdown-item text-danger" href="#"><span class="fas fa-trash-alt mr-2"></span>停用會員</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@item.Member_Type</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.Register_Date</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>
