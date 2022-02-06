@@ -27,9 +27,17 @@
       <End Role="Member" EntitySet="Member" />
       <End Role="Plan_Order" EntitySet="Plan_Order" />
     </AssociationSet>
+    <AssociationSet Name="FK_Staking_Order_Member" Association="BEEWiNModel.FK_Staking_Order_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Staking_Order" EntitySet="Staking_Order" />
+    </AssociationSet>
     <AssociationSet Name="FK_Plan_Order_Plan" Association="BEEWiNModel.FK_Plan_Order_Plan">
       <End Role="Plan" EntitySet="Plan" />
       <End Role="Plan_Order" EntitySet="Plan_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staking_Order_Staking" Association="BEEWiNModel.FK_Staking_Order_Staking">
+      <End Role="Staking" EntitySet="Staking" />
+      <End Role="Staking_Order" EntitySet="Staking_Order" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Admin">
@@ -79,6 +87,7 @@
     <NavigationProperty Name="Coin_Order" Relationship="BEEWiNModel.FK_CoinOrder_Member" FromRole="Member" ToRole="Coin_Order" />
     <NavigationProperty Name="Wallet" Relationship="BEEWiNModel.FK_Member_Wallet" FromRole="Member" ToRole="Wallet" />
     <NavigationProperty Name="Plan_Order" Relationship="BEEWiNModel.FK_Plan_Order_Member" FromRole="Member" ToRole="Plan_Order" />
+    <NavigationProperty Name="Staking_Order" Relationship="BEEWiNModel.FK_Staking_Order_Member" FromRole="Member" ToRole="Staking_Order" />
   </EntityType>
   <EntityType Name="Plan">
     <Key>
@@ -132,6 +141,7 @@
     <Property Name="Capital_Object" Type="Decimal" Precision="20" Scale="0" />
     <Property Name="Staking_Status" Type="Boolean" Nullable="false" />
     <Property Name="Icon" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Staking_Order" Relationship="BEEWiNModel.FK_Staking_Order_Staking" FromRole="Staking" ToRole="Staking_Order" />
   </EntityType>
   <EntityType Name="Staking_Order">
     <Key>
@@ -147,6 +157,8 @@
     <Property Name="Staking_Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Expire_Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Order_Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Member" Relationship="BEEWiNModel.FK_Staking_Order_Member" FromRole="Staking_Order" ToRole="Member" />
+    <NavigationProperty Name="Staking" Relationship="BEEWiNModel.FK_Staking_Order_Staking" FromRole="Staking_Order" ToRole="Staking" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -217,6 +229,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Staking_Order_Member">
+    <End Type="BEEWiNModel.Member" Role="Member" Multiplicity="1" />
+    <End Type="BEEWiNModel.Staking_Order" Role="Staking_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Staking_Order">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Plan_Order_Plan">
     <End Type="BEEWiNModel.Plan" Role="Plan" Multiplicity="1" />
     <End Type="BEEWiNModel.Plan_Order" Role="Plan_Order" Multiplicity="*" />
@@ -226,6 +250,18 @@
       </Principal>
       <Dependent Role="Plan_Order">
         <PropertyRef Name="PId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staking_Order_Staking">
+    <End Type="BEEWiNModel.Staking" Role="Staking" Multiplicity="1" />
+    <End Type="BEEWiNModel.Staking_Order" Role="Staking_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staking">
+        <PropertyRef Name="SId" />
+      </Principal>
+      <Dependent Role="Staking_Order">
+        <PropertyRef Name="SId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

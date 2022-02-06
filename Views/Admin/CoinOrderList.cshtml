@@ -1,4 +1,5 @@
-﻿<script>
+﻿
+<script>
     document.getElementById("order").classList.add("active");
     document.getElementById("submenu-app").classList.add("show");
 </script>
@@ -32,7 +33,7 @@
                     </nav>
 
                     <div class="jumbotron">
-                        <h1>代幣訂單管理</h1>
+                        <h1>質押訂單管理</h1>
                     </div>
 
 
@@ -89,8 +90,7 @@
                                                         @if (item.Order_Status == "未付款")
                                                         {
                                                             <a class="dropdown-item text-success" href="@Url.Action("checkcoinorder","order")?orderguid=@item.Order_Guid"><span class="fas fa-check mr-2"></span>訂單審核</a>
-                                                            <a class="dropdown-item" href="#"><span class="fas fa-edit mr-2"></span>檢視編輯訂單</a>
-                                                            <a class="dropdown-item text-danger" href="@Url.Action("CancelOrder","CancelOrder")?OrderGuid=@item.Order_Guid" onclick="return confirm('確認取消訂單?')"><span class="fas fa-trash-alt mr-2"></span>取消訂單</a>
+                                                            <a class="dropdown-item text-danger" href="@Url.Action("deletecoinorder","order")?orderguid=@item.Order_Guid" onclick="return confirm('確認刪除訂單?')"><span class="fas fa-trash-alt mr-2"></span>刪除訂單</a>
                                                         }
                                                     </div>
                                                 </div>

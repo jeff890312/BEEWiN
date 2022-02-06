@@ -1,5 +1,4 @@
 ﻿@model BEEWiN.Models.Coin
-<meta name="description" content="獲利了我們一起成長；虧損我們一起承擔，不收任何手續費，最能同甘共苦的理財平台。">
 <style>
     .align-self-center li {
         font-weight: 400;
@@ -47,8 +46,19 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-lg-7 align-self-center">
-                                <h3 class="h1 post-title mb-0" style="display:flex; justify-content: space-between;">@Model.Name<a href="#" class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#modal-01">我要認購</a></h3>
+                                <h3 class="h1 post-title mb-0" style="display:flex; justify-content: space-between;">
+                                    @Model.Name
+                                    @if (Session["Member"] != null)
+                                    {
+                                        <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#testpay">兌幣儲值</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#modal-login">兌幣儲值</a>
+                                    }
+                                </h3>
                                 <hr class="my-8">
                                 <ul class="px-0">
                                     <li><span class="h4">本期募資目標：</span>100,000 BWC</li>
@@ -87,7 +97,14 @@
                                     <li>回饋年化 7.2%~20%</li>
                                     <li>鎖倉到期時，BEEWiN承諾將1:1購回，用戶可自行選擇繼續質押或其他用途。</li>
                                 </ul>
-                                <a href="#" class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#modal-01">我要申購</a>
+                                @if (Session["Member"] != null)
+                                {
+                                    <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#testpay">兌幣儲值</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#modal-login">兌幣儲值</a>
+                                }
                             </div>
                             <!--/.card-body -->
                         </div>

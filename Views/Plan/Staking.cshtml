@@ -161,23 +161,25 @@
                                 <a class="text-gold">儲值</a>
                             </div>
 
-                            <form class="text-start mt-1 mb-3" action="@Url.Action("Register", "Account")" method="post">
+                            <form class="text-start mt-1 mb-3" action="@Url.Action("addstakingorder", "order")" method="post">
                                 <div class="form-group form-label-group mb-3">
                                     <input type="number" min="@i.SPrice" value="@i.SPrice.ToString("F0")" class="form-control" name="amount" required>
                                     <label for="amount"> 質押數量 (最低 @i.SPrice.ToString("N0") BWC)</label>
                                 </div>
-                            </form>
+                                <input type="hidden" value="@i.SId" class="form-control" name="sid" required>
 
-                            <div class="alert" style="background-color: #f5f5f5; margin-bottom:5px;">
-                                <div style="display: flex; justify-content: space-between; ">
-                                    <span>質押到期收益</span>
-                                    <strong class="text-success">100.00 BWC</strong>
+
+                                <div class="alert" style="background-color: #f5f5f5; margin-bottom:5px;">
+                                    <div style="display: flex; justify-content: space-between; ">
+                                        <span>質押到期收益</span>
+                                        <strong class="text-success">100.00 BWC</strong>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div>
-                                <button style="width:100%" type="submit" class="btn btn-primary w-100">立即質押</button>
-                            </div>
+                                <div>
+                                    <button style="width:100%" type="submit" class="btn btn-primary w-100">立即質押</button>
+                                </div>
+                            </form>
                         </div>
                         <!--/.modal-content -->
                     </div>

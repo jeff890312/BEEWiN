@@ -181,6 +181,134 @@
 </html>
 
 <model>
+    <model>
+        <div>
+            <script>
+                function replace(hide, hideq, show, showq) {
+                    document.getElementById(hide).style.display = "none";
+                    document.getElementById(hideq).style.display = "none";
+                    document.getElementById(show).style.display = "";
+                    document.getElementById(showq).style.display = "";
+                }
+                function Agree(c) {
+                    if (c.checked) {
+                        document.getElementById("topay").classList.remove("disabled");
+                        document.getElementById('topay').style.backgroundColor = "#cab380";
+                        document.getElementById('topay').style.borderColor = "#cab380";
+                    } else {
+                        document.getElementById("topay").classList.add('disabled');
+                        document.getElementById('topay').style.backgroundColor = "darkgrey";
+                        document.getElementById('topay').style.borderColor = "darkgrey";
+                    }
+                }
+                function copyEvent(id) {
+                    var str = document.getElementById(id);
+                    window.getSelection().selectAllChildren(str);
+                    document.execCommand("Copy");
+                    Swal.fire({
+                        icon: 'success',
+                        title: '複製成功',
+                        text: '',
+                        showConfirmButton: false,
+                        timer: 1000,
+                        width: 300,
+                    });
+                }
+            </script>
+            <style>
+                .copy1 {
+                    background-image: url('../../Template/Front/image/copy.svg');
+                    width: 24px;
+                    height: 24px;
+                    border: none;
+                    background-color: transparent;
+                }
+            </style>
+            <div class="modal fade" id="testpay" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                    <div class="modal-content ">
+                        <div class="modal-body">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h3 class="mb-4">兌幣儲值</h3>
+                            <hr class="my-2">
+                            <form class="text-start mt-1" action="@Url.Action("addorder", "order")" method="post">
+                                <small>將支付</small>
+                                <div class="align-items-center" style="display: flex; justify-content: space-between; ">
+                                    <div class="col-1">
+                                        <img height="30px" src="~/Template/Front/image/icons/Usdt.svg">
+                                    </div>
+                                    <div class="col-11 form-group form-label-group" style="float:right;padding-left:10px;">
+                                        <input type="number" min="1000" value="1000" class="form-control" required>
+                                        <label for="amount"> USDT</label>
+                                    </div>
+                                </div>
+                                <small>將收到</small>
+                                <div class="align-items-center mb-3" style="display: flex; justify-content: space-between; ">
+                                    <div class="col-1">
+                                        <img height="30px" src="~/Template/Front/image/icons/BEEWiN Coin.png">
+                                    </div>
+                                    <div class="col-11 form-group form-label-group" style="float:right;padding-left:10px;">
+                                        <input type="hidden" name="symbol" value="BWC" class="form-control" required>
+                                        <input type="number" name="amount" min="1000" value="1000" class="form-control" required>
+                                        <label for="amount"> BWC</label>
+                                    </div>
+                                </div>
+
+                                <div class="alert mb-3" style="background-color: #f5f5f5; margin-bottom:5px;">
+                                    <div style="display: flex; justify-content: space-between; ">
+                                        <small>BWC價格</small>
+                                        <small>1.0000 (USDT)</small>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; ">
+                                        <small>數量</small>
+                                        <small>1,000</small>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; ">
+                                        <small>手續費</small>
+                                        <small class="text-gradient">0 %</small>
+                                    </div>
+                                    <hr class="my-2" />
+                                    <div style="display: flex; justify-content: space-between; ">
+                                        <small>實際收取</small>
+                                        <a class="text-success">1,000 (USDT)</a>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mb-3">
+                                    <div class="mb-3">
+                                        <a class="btn btn-sm btn-primary-add rounded w-100" onclick="replace('TRC20','TRC20Q','ERC20','ERC20Q')">ERC20</a>
+                                        <a class="btn btn-sm btn-primary-add2 rounded w-100" onclick="replace('ERC20','ERC20Q','TRC20','TRC20Q')">TRC20</a>
+                                    </div>
+                                    <div id="TRC20Q" class="col-md-12 mb-3">
+                                        <img width="30%" src="https://imgur.com/RhyDYXb.jpg" alt="" />
+                                        <br />
+                                        <small>USDT儲值地址 (TRC20)</small><input type="button" onclick="copyEvent('TRC20')" class="copy1" />
+                                    </div>
+                                    <div id="TRC20" class="form-group">
+                                        <input type="text" value="TX3RRyEbELcDoEq42CMK57AJ3yQmKdpAeq" class="form-control" name="amount" readonly="readonly" required>
+                                    </div>
+
+                                    <div id="ERC20Q" class="col-md-12 mb-3" style="display: none">
+                                        <img width="30%" src="https://i.imgur.com/GsR1X9N.jpg" alt="" />
+                                        <br />
+                                        <small>USDT儲值地址 (ERC20)</small><input type="button" onclick="copyEvent('ERC20')" class="copy1" />
+                                    </div>
+                                    <div id="ERC20" style="display:none" class="form-group">
+                                        <input type="text" value="0x2cf76c7f57c4176c4d32a44f310bb387c6182aee" class="form-control" name="amount" readonly="readonly" required>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button style="width:100%" type="submit" class="btn btn-primary w-100" onclick="return confirm('!!!重要!!!\n請確認已完成轉帳，轉帳請稍後5-10分鐘\n我們將由專人盡速為您處理帳款!')">確認已付款</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </model>
+
     <!-- 登入 -->
     <div class="modal fade" id="modal-login" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-sm">

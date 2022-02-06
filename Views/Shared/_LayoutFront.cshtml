@@ -4,6 +4,7 @@
 <head runat="server">
     <title>必盈網BEEWiN | 全新型態的數位資產管理平台</title>
     <meta name="keywords" content="BEEWiN必盈網,比特幣,BTC,虛擬貨幣,數位貨幣">
+    @RenderSection("MetaDescription", false)
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="og:image" content="~/Template/Front/image/fb.jpg" />
@@ -127,7 +128,7 @@
 
     @RenderBody()
 
-    <footer class="bg-dark text-inverse mt-5 mt-md-16">
+    <footer class="bg-dark text-inverse mt-5 mt-md-5">
         <div class="container py-13 py-md-15">
             <div class="row gy-6 gy-lg-0">
                 <div class="col-md-4 col-lg-3">
@@ -343,7 +344,7 @@
 
                     <div class="divider-icon my-4">or</div>
                     <p class="mb-1">
-                        <a href="@Url.Action("ForgotPassword","ForgotPassword")" class="hover">忘記密碼?</a>
+                        <a href="@Url.Action("forgotpassword","account")" class="hover">忘記密碼?</a>
                     </p>
                     <p class="mb-0">
                         還不是會員嗎 ?
@@ -402,7 +403,7 @@
 
                     <div class="divider-icon my-4">or</div>
                     <p class="mb-1">
-                        <a href="@Url.Action("ForgotPassword","ForgotPassword")" class="hover">忘記密碼?</a>
+                        <a href="@Url.Action("forgotpassword","account")" class="hover">忘記密碼?</a>
                     </p>
                     <p class="mb-0">
                         已經是會員嗎 ?

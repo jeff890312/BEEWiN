@@ -5,21 +5,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="eb282dc082ff4af7b422243962b25cfd" Name="Diagram1" ZoomLevel="56" >
-        <EntityTypeShape EntityType="BEEWiNModel.Admin" Width="1.5" PointX="0.75" PointY="8.875" />
-        <EntityTypeShape EntityType="BEEWiNModel.Coin" Width="1.5" PointX="6" PointY="1.5" />
-        <EntityTypeShape EntityType="BEEWiNModel.Coin_Order" Width="1.5" PointX="8.25" PointY="5.125" />
+        <EntityTypeShape EntityType="BEEWiNModel.Admin" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BEEWiNModel.Coin" Width="1.5" PointX="3" PointY="1.625" />
+        <EntityTypeShape EntityType="BEEWiNModel.Coin_Order" Width="1.5" PointX="5.25" PointY="1.25" />
         <EntityTypeShape EntityType="BEEWiNModel.Member" Width="1.5" PointX="3" PointY="5.125" />
-        <EntityTypeShape EntityType="BEEWiNModel.Plan" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="BEEWiNModel.Plan_Order" Width="1.5" PointX="5.25" PointY="5" />
-        <EntityTypeShape EntityType="BEEWiNModel.Staking" Width="1.5" PointX="2.75" PointY="8.875" />
-        <EntityTypeShape EntityType="BEEWiNModel.Staking_Order" Width="1.5" PointX="4.75" PointY="8.875" />
-        <EntityTypeShape EntityType="BEEWiNModel.sysdiagrams" Width="1.5" PointX="6.75" PointY="8.875" />
-        <EntityTypeShape EntityType="BEEWiNModel.Wallet" Width="1.5" PointX="0.75" PointY="5.5" />
+        <EntityTypeShape EntityType="BEEWiNModel.Plan" Width="1.5" PointX="6" PointY="9.875" />
+        <EntityTypeShape EntityType="BEEWiNModel.Plan_Order" Width="1.5" PointX="8.25" PointY="5.125" />
+        <EntityTypeShape EntityType="BEEWiNModel.Staking" Width="1.5" PointX="3" PointY="9.875" />
+        <EntityTypeShape EntityType="BEEWiNModel.Staking_Order" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="BEEWiNModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BEEWiNModel.Wallet" Width="1.5" PointX="0.75" PointY="5.625" />
         <AssociationConnector Association="BEEWiNModel.FK_CoinOrder_Coin" />
         <AssociationConnector Association="BEEWiNModel.FK_CoinOrder_Member" />
         <AssociationConnector Association="BEEWiNModel.FK_Member_Wallet" />
         <AssociationConnector Association="BEEWiNModel.FK_Plan_Order_Member" />
+        <AssociationConnector Association="BEEWiNModel.FK_Staking_Order_Member" />
         <AssociationConnector Association="BEEWiNModel.FK_Plan_Order_Plan" />
+        <AssociationConnector Association="BEEWiNModel.FK_Staking_Order_Staking" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

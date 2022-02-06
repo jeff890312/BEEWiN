@@ -2680,6 +2680,12 @@
     <Content Include="Views\User\CoinOrders.cshtml" />
     <Content Include="Views\Plan\Staking.cshtml" />
     <Content Include="Views\BWC\Beewincoin.cshtml" />
+    <Content Include="Views\User\StakingOrders.cshtml" />
+    <Content Include="Views\Admin\StakingOrderList.cshtml" />
+    <Content Include="Views\User\Settings.cshtml" />
+    <Content Include="Views\AboutUs\BEEWiN.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

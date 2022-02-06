@@ -1,9 +1,12 @@
 ﻿using BEEWiN.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BEEWiN.Controllers
 {
@@ -95,6 +98,36 @@ namespace BEEWiN.Controllers
         {
             Session.Clear();
             return RedirectToAction("Index", "Home");
+        }
+        //=======================================================
+        // 忘記密碼
+        public ActionResult ForgotPassword()
+        {
+            return View("forgotpassword", "_LayoutAdmin");
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            var Member = db.Member.Where(m => m.Email == email).FirstOrDefault();
+            if (Member != null)
+            {
+                Mail mail = new Mail();
+                Encryption encryption = new Encryption();
+                //=======================================================
+                // 自動產生亂數密碼
+                var autopassword = Membership.GeneratePassword(8, 1); //至少3符號字元
+                autopassword = Regex.Replace(autopassword, @"[^a-zA-Z0-9]", m => "7");
+                //=======================================================
+                // 發送郵件               
+                mail.MailMessage(email, "BEEWiN 臨時密碼", autopassword);
+                //=======================================================
+                // SHA256加密                     
+                Member.Password = encryption.SHA256(autopassword);
+                //=======================================================     
+                db.Entry(Member).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View("forgotpassword", "_LayoutAdmin");
         }
     }
 }

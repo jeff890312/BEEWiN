@@ -19,6 +19,7 @@ namespace BEEWiN.Models
         {
             this.Coin_Order = new HashSet<Coin_Order>();
             this.Plan_Order = new HashSet<Plan_Order>();
+            this.Staking_Order = new HashSet<Staking_Order>();
         }
     
         public string Email { get; set; }
@@ -34,5 +35,7 @@ namespace BEEWiN.Models
         public virtual Wallet Wallet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Plan_Order> Plan_Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Staking_Order> Staking_Order { get; set; }
     }
 }

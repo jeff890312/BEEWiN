@@ -187,6 +187,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Staking_Order_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Staking_Order" Type="Self.Staking_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Staking_Order">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staking_Order_Staking">
+    <End Role="Staking" Type="Self.Staking" Multiplicity="1" />
+    <End Role="Staking_Order" Type="Self.Staking_Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staking">
+        <PropertyRef Name="SId" />
+      </Principal>
+      <Dependent Role="Staking_Order">
+        <PropertyRef Name="SId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="BEEWiNModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Coin" EntityType="Self.Coin" Schema="dbo" store:Type="Tables" />
@@ -217,6 +241,14 @@
     <AssociationSet Name="FK_Plan_Order_Plan" Association="Self.FK_Plan_Order_Plan">
       <End Role="Plan" EntitySet="Plan" />
       <End Role="Plan_Order" EntitySet="Plan_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staking_Order_Member" Association="Self.FK_Staking_Order_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Staking_Order" EntitySet="Staking_Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staking_Order_Staking" Association="Self.FK_Staking_Order_Staking">
+      <End Role="Staking" EntitySet="Staking" />
+      <End Role="Staking_Order" EntitySet="Staking_Order" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

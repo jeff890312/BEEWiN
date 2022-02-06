@@ -24,5 +24,8 @@ namespace BEEWiN.Models
         public System.DateTime Staking_Date { get; set; }
         public System.DateTime Expire_Date { get; set; }
         public string Order_Status { get; set; }
+    
+        public virtual Member Member { get; set; }
+        public virtual Staking Staking { get; set; }
     }
 }

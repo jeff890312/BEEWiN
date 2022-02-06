@@ -1,5 +1,6 @@
 ﻿<script>
-    document.getElementById("member").classList.add("active");
+    document.getElementById("stakingorder").classList.add("active");
+    document.getElementById("submenu-app").classList.add("show");
 </script>
 <body>
     <div class="container-fluid bg-soft">
@@ -31,7 +32,7 @@
                     </nav>
 
                     <div class="jumbotron">
-                        <h1>顧客資料管理</h1>
+                        <h1>質押訂單管理</h1>
                     </div>
 
 
@@ -39,7 +40,7 @@
                         <div class="row align-items-center justify-content-between">
 
                             <div class="col col-md-6 col-lg-6 col-xl-6">
-                                <form action="@Url.Action("memberlist","admin")" method="post">
+                                <form action="@Url.Action("stakingorderlist","admin")" method="post">
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon2"><span class="fas fa-search"></span></span>
                                         <input type="text" class="form-control" name="searchString" id="exampleInputIconLeft" placeholder="請輸入Email" aria-label="Search" aria-describedby="basic-addon2">
@@ -52,6 +53,7 @@
                                         <button type="submit" class="btn btn-primary">查詢<span class="fas fa-search ml-2"></span> </button>
                                     </div>
                                 </form>
+                                <a class="btn btn-primary" href="@Url.Action("DeleteCancelOrder", "DeleteCancelOrder")" onclick="return confirm('確認清除?')">清除取消狀態訂單<span class="fas fa-broom ml-2"></span> </a>
                             </div>
 
                         </div>
@@ -60,41 +62,64 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>選項</th>
-                                        <th>類別</th>
-                                        <th>帳號</th>
-                                        <th>暱稱</th>
-                                        <th>手機</th>
-                                        <th>國家</th>
-                                        <th>註冊日</th>
+                                        <th>訂單狀態</th>
+                                        <th>方案名稱</th>
+                                        <th>客戶</th>
+                                        <th>年化APY</th>
+                                        <th>報酬數量</th>
+                                        <th>質押數量</th>
+                                        <th>質押時間</th>
+                                        <th>到期時間</th>
+                                        <th>訂單編號</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!-- Item -->
-                                    @foreach (var item in ViewBag.SelectMemberlist)
+                                    @foreach (var item in ViewBag.SelectOrderlist)
                                     {
                                     <tr>
+                                        @if (item.Order_Status == "質押中")
+                                        {
+                                            <td>
+                                                <span class="font-weight-bold text-warning">@item.Order_Status 剩餘@((item.Expire_Date - DateTime.Now).Days)日</span>
+                                            </td>
+                                        }
+                                        else if (item.Order_Status == "已結算")
+                                        {
+                                            <td>
+                                                <span class="font-weight-bold text-success">@item.Order_Status</span>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <span class="font-weight-bold text-gray">@item.Order_Status</span>
+                                            </td>
+                                        }
                                         <td>
-                                            <div class="btn-group">
-                                                <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="icon icon-sm">
-                                                        <span class="fas fa-ellipsis-h icon-dark"></span>
-                                                    </span>
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    @*<a class="dropdown-item" href="../invoice.html"><span class="fas fa-eye mr-2"></span>會員詳情</a>*@
-                                                    <a class="dropdown-item" href="@Url.Action("ModifyMember","ModifyMember")?Email=@item.Email"><span class="fas fa-edit mr-2"></span>檢視編輯資料</a>
-                                                    <a class="dropdown-item text-danger" href="#"><span class="fas fa-trash-alt mr-2"></span>停用會員</a>
-                                                </div>
-                                            </div>
+                                            <span class="font-weight-normal">@item.Symbol-@item.Staking.SName</span>
                                         </td>
-                                        <td>@item.Member_Type</td>
-                                        <td>@item.Email</td>
-                                        <td>@item.Name</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.Country</td>
-                                        <td>@item.Register_Date</td>
+                                        <td>
+                                            <span class="font-weight-normal">@item.Email</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-weight-normal">@item.ARP %</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-weight-bold text-success">@item.Return_Amount</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-weight-normal">@item.Amount</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-weight-normal">@item.Staking_Date</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-weight-normal">@item.Expire_Date</span>
+                                        </td>
+                                        <td>
+                                            <small>@item.Order_Guid.Substring(0, 8)</small>
+                                        </td>
                                     </tr>
                                     }
                                 </tbody>

@@ -11,7 +11,11 @@ namespace BEEWiN.Controllers.Front
         //團隊成員
         public ActionResult Team()
         {
-            return View("Team", "_LayoutFront");
+            return View("team", "_LayoutFront");
+        }
+        public ActionResult BEEWiN()
+        {
+            return View("BEEWiN", "_LayoutFront");
         }
     }
 }

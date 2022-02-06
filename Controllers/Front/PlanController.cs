@@ -26,8 +26,7 @@ namespace BEEWiN.Controllers.Front
             {
                 TempData["Current"] = 0;
                 TempData["CurrentTWD"] = 0;
-            }
-            
+            }   
 
             return View("staking", "_LayoutFront");
         }

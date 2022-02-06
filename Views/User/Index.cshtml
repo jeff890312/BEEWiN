@@ -8,6 +8,10 @@
         <div class="row">
             <div class="col-12">
                 <main>
+                    <div class="jumbotron">
+                        <h1>帳戶資產</h1>
+                        <br />
+                    </div>
 
                     <div class="col-12 mb-4">
                         <div class="card shadow-sm">
@@ -34,8 +38,8 @@
                                                 <h5><span class="h3 font-weight-bolder" style="font-size:24px;font-weight:700;">@Model.Wallet.Current_Accounts.ToString("N2")</span> BWC</h5>
                                                 <small class="mr-2">≈ @((Model.Wallet.Current_Accounts*28).ToString("N2")) TWD</small>
                                                 <br />
-                                                <a href="@Url.Action("beewincoin", "Home")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fa fa-plus-square mr-1"></i> 購買</a>
-                                                <a href="@Url.Action("beewincoin", "Home")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fa fa-exchange-alt mr-1"></i> 提領</a>
+                                                <a href="@Url.Action("beewincoin", "bwc")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fa fa-plus-square mr-1"></i> 儲值</a>
+                                                <a href="@Url.Action("beewincoin", "bwc")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fa fa-exchange-alt mr-1"></i> 提領</a>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-5 px-xl-0">
@@ -47,8 +51,8 @@
                                         </div>
                                         <div class="col-12 col-xl-5 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <a href="@Url.Action("beewincoin", "Home")" class="float-right px-5 mr-6 btn btn-outline-gray"><i class="fa fa-exchange-alt mr-1"></i> 提領</a>
-                                                <a href="@Url.Action("beewincoin", "Home")" class="float-right px-5 mr-2 btn btn-outline-gray"><i class="fa fa-plus-square mr-1"></i> 購買</a>
+                                                <a href="@Url.Action("beewincoin", "bwc")" class="float-right px-5 mr-6 btn btn-outline-gray"><i class="fa fa-exchange-alt mr-1"></i> 提領</a>
+                                                <a href="@Url.Action("beewincoin", "bwc")" class="float-right px-5 mr-2 btn btn-outline-gray"><i class="fa fa-plus-square mr-1"></i> 儲值</a>
                                             </div>
                                         </div>
                                     </div>
@@ -67,8 +71,8 @@
                                                 <h5><span class="h3 font-weight-bolder" style="font-size:24px;font-weight:700;">@Model.Wallet.Staking_Accounts.ToString("N2")</span> BWC</h5>
                                                 <small class="mr-2">≈ @((Model.Wallet.Staking_Accounts* 28).ToString("N2")) TWD</small>
                                                 <br />
-                                                <a href="@Url.Action("beewincoin", "Home")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fa fa-plus-square mr-1"></i> 購買</a>
-                                                <a href="@Url.Action("beewincoin", "Home")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fa fa-exchange-alt mr-1"></i> 劃轉</a>
+                                                <a href="@Url.Action("staking", "plan")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fas fa-donate mr-1"></i> 質押</a>
+                                                <a href="@Url.Action("stakingorders", "user")" class="mt-2 mr-2 btn btn-outline-gray"><i class="fas fa-search mr-1"></i> 檢視</a>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-5 px-xl-0">
@@ -80,8 +84,8 @@
                                         </div>
                                         <div class="col-12 col-xl-5 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <a href="@Url.Action("beewincoin", "Home")" class="float-right px-5 mr-6 btn btn-outline-gray"><i class="fa fa-exchange-alt mr-1"></i> 劃轉</a>
-                                                <a href="@Url.Action("beewincoin", "Home")" class="float-right px-5 mr-2 btn btn-outline-gray"><i class="fa fa-plus-square mr-1"></i> 購買</a>
+                                                <a href="@Url.Action("stakingorders", "user")" class="float-right px-5 mr-6 btn btn-outline-gray"><i class="fas fa-search mr-1"></i> 檢視</a>
+                                                <a href="@Url.Action("staking", "plan")" class="float-right px-5 mr-2 btn btn-outline-gray"><i class="fas fa-donate"></i> 質押</a>
                                             </div>
                                         </div>
                                     </div>
@@ -110,7 +114,8 @@
                                         </div>
                                         <div class="col-12 col-xl-2 px-xl-0">
                                             <div class="d-none d-sm-block">
-                                                <a href="@Url.Action("beewincoin", "Home")" class="float-right px-5 mr-6 btn btn-outline-gray"><i class="fa fa-exchange-alt mr-1"></i> 轉移</a>
+                                                <a href="@Url.Action("beewincoin", "Home")" class="float-right px-5 mr-6 btn btn-outline-gray disabled"><i class="fa fa-exchange-alt mr-1"></i> 轉移</a>
+                                                <small class="text-gray-700">尚未開放KYC</small>
                                             </div>
                                         </div>
                                         <div class="col-12 col-xl-2 text-xl-center mb-xl-0 d-flex align-items-center justify-content-xl-center">
@@ -133,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </main>
             </div>
         </div>

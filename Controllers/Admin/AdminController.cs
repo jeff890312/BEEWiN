@@ -52,6 +52,40 @@ namespace BEEWiN.Controllers.Admin
             ViewBag.SelectOrderlist = order;
             return View("coinorderlist", "_LayoutAdmin");
         }
+        public ActionResult StakingOrderList(string searchString, int? status = 0)
+        {
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("permissiondenied", "error");
+            }
+            var order = from m in db.Staking_Order
+                        orderby m.Staking_Date descending
+                        select m;
+            if (status == 1)
+            {
+                order = (IOrderedQueryable<Staking_Order>)order.Where(m => m.Order_Status == "未付款");
+            }
+            else if (status == 2)
+            {
+                order = from m in db.Staking_Order
+                        where m.Order_Status == "進行中"
+                        orderby m.Staking_Date descending
+                        select m;
+            }
+            else if (status == 3)
+            {
+                order = from m in db.Staking_Order
+                        where m.Order_Status == "取消"
+                        orderby m.Staking_Date descending
+                        select m;
+            }
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                order = (IOrderedQueryable<Staking_Order>)order.Where(x => x.Email.Contains(searchString));
+            }
+            ViewBag.SelectOrderlist = order;
+            return View("stakingorderlist", "_LayoutAdmin");
+        }
         public ActionResult MemberList(string searchString, int? status = 0)
         {
             if (Session["Admin"] == null)

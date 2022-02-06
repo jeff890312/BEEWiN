@@ -1,6 +1,8 @@
 ﻿<script>
+    var bli = document.getElementById("orders");
+    bli.classList.add("show");
     var li = document.getElementById("coinorders");
-    li.classList.add("active");
+    li.classList.add("active");  
 </script>
 
 <body>
@@ -19,12 +21,12 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th>訂單狀態</th>
                                         <th>方案名稱</th>
+                                        <th>總額(USDT)</th>
                                         <th>數量</th>
                                         <th>價格(USDT)</th>
-                                        <th>總額(USDT)</th>
                                         <th>申購時間</th>
-                                        <th>訂單狀態</th>
                                         <th>訂單編號</th>
                                     </tr>
                                 </thead>
@@ -33,9 +35,29 @@
                                     @foreach (var item in ViewBag.Coinorders)
                                     {
                                     <tr>
-
+                                        @if (item.Order_Status == "未付款")
+                                        {
+                                            <td>
+                                                <span class="font-weight-bold text-danger">@item.Order_Status</span>
+                                            </td>
+                                        }
+                                        else if (item.Order_Status == "通過")
+                                        {
+                                            <td>
+                                                <span class="font-weight-bold text-warning">@item.Order_Status</span>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <span class="font-weight-bold text-gray">@item.Order_Status</span>
+                                            </td>
+                                        }
                                         <td>
                                             <span class="font-weight-normal">@item.Symbol</span>
+                                        </td>
+                                        <td>
+                                            <span class="font-weight-normal text-success">@item.Total</span>
                                         </td>
                                         <td>
                                             <span class="font-weight-normal">@item.Buy_Amount</span>
@@ -44,13 +66,7 @@
                                             <span class="font-weight-normal">@item.Buy_Price</span>
                                         </td>
                                         <td>
-                                            <span class="font-weight-normal text-success">@item.Total</span>
-                                        </td>
-                                        <td>
                                             <span class="font-weight-normal">@item.Buy_Date</span>
-                                        </td>
-                                        <td>
-                                            <span class="font-weight-normal">@item.Order_Status</span>
                                         </td>
                                         <td>
                                             <small>@item.Order_Guid.Substring(0, 8)</small>

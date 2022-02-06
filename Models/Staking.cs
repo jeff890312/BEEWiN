@@ -14,6 +14,12 @@ namespace BEEWiN.Models
     
     public partial class Staking
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Staking()
+        {
+            this.Staking_Order = new HashSet<Staking_Order>();
+        }
+    
         public string SId { get; set; }
         public string SType { get; set; }
         public string Symbol { get; set; }
@@ -27,5 +33,8 @@ namespace BEEWiN.Models
         public Nullable<decimal> Capital_Object { get; set; }
         public bool Staking_Status { get; set; }
         public string Icon { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Staking_Order> Staking_Order { get; set; }
     }
 }
