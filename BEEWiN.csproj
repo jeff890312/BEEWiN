@@ -2686,6 +2686,8 @@
     <Content Include="Views\AboutUs\BEEWiN.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
+    <Content Include="Views\Account\Verify.cshtml" />
+    <Content Include="Views\Account\Welcome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

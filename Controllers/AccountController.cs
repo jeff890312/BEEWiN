@@ -59,6 +59,34 @@ namespace BEEWiN.Controllers
             if (check_member == null)
             {
                 //=======================================================
+                // 信箱驗證
+                Session["VerifyCode"] = mail.VerifyCode(member.Email);
+                //=======================================================
+                // 暫存會員資料
+                TempData["Member"] = member;
+                return RedirectToAction("verify", "account");
+            }
+            else
+            {
+                //=======================================================
+                // 註冊失敗
+                TempData["RegisterFail"] = "on";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        //=======================================================
+        // 會員信箱認證
+        public ActionResult Verify()
+        {
+            return View("Verify", "_LayoutFront");
+        }
+        [HttpPost]
+        public ActionResult Verify(string verifycode)
+        {
+            if (verifycode == Session["VerifyCode"].ToString())
+            {
+                var member = (TempData["Member"] as Member);
+                //=======================================================
                 // 紀錄會員
                 member.Password = encryption.SHA256(member.Password); // SHA256加密
                 member.Register_Date = DateTime.Now;
@@ -69,11 +97,7 @@ namespace BEEWiN.Controllers
                 Wallet wallet = new Wallet();
                 wallet.Email = member.Email;
                 db.Wallet.Add(wallet);
-
                 db.SaveChanges();
-                //=======================================================
-                // 信箱驗證
-                Session["VerifyCode"] = mail.VerifyCode(member.Email);
                 //=======================================================
                 // LineNotify
                 string br = "\r\n";
@@ -81,16 +105,16 @@ namespace BEEWiN.Controllers
                                   "[會員名稱]: " + member.Name + br +
                                   "[會員帳號]: " + member.Email + br;
                 notify.SendMessage(sent_msg);
-
-                return RedirectToAction("Verify", "Verify");
+                //=======================================================           
+                Session.Remove("VerifyCode");
+                return RedirectToAction("welcome", "account");
             }
-            else
-            {
-                //=======================================================
-                // 註冊失敗
-                TempData["RegisterFail"] = "on";
-                return RedirectToAction("Index", "Home");
-            }
+            TempData["Verify"] = "fall";
+            return View("verify", "_LayoutFront");
+        }
+        public ActionResult Welcome()
+        {
+            return View("welcome", "_LayoutAdmin");
         }
         //=======================================================
         // 登出
