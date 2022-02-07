@@ -1,0 +1,100 @@
+﻿<script>
+    var bli = document.getElementById("orders");
+    bli.classList.add("show");
+    var li = document.getElementById("stakingorders");
+    li.classList.add("active");
+</script>
+
+<body>
+    <div class="container-fluid bg-soft">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="jumbotron">
+                    <h1>質押訂單</h1>
+                    <br />
+                </div>
+
+                <div class="table-settings mb-4">
+
+                    <div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>訂單狀態</th>
+                                    <th>方案名稱</th>
+                                    <th>年化APY</th>
+                                    <th>報酬數量</th>
+                                    <th>質押數量</th>
+                                    <th>質押時間</th>
+                                    <th>到期時間</th>
+                                    <th>訂單編號</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Item -->
+                                @foreach (var item in ViewBag.Stakingorders)
+                                {
+                                <tr>
+                                    @if (item.Order_Status == "質押中")
+                                    {
+                                        <td>
+                                            <span class="font-weight-bold text-warning">@item.Order_Status 剩餘@((item.Expire_Date - item.Staking_Date).Days)日</span>
+                                        </td>
+                                    }
+                                    else if (item.Order_Status == "已結算")
+                                    {
+                                        <td>
+                                            <span class="font-weight-bold text-success">@item.Order_Status</span>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <span class="font-weight-bold text-gray">@item.Order_Status</span>
+                                        </td>
+                                    }
+                                    <td>
+                                        <span class="font-weight-normal">@item.Symbol-@item.Staking.SName</span>
+                                    </td>
+                                    <td>
+                                        <span class="font-weight-normal">@item.ARP %</span>
+                                    </td>
+                                    <td>
+                                        <span class="font-weight-bold text-success">@item.Return_Amount</span>
+                                    </td>
+                                    <td>
+                                        <span class="font-weight-normal">@item.Amount</span>
+                                    </td>
+                                    <td>
+                                        <span class="font-weight-normal">@item.Staking_Date</span>
+                                    </td>
+                                    <td>
+                                        <span class="font-weight-normal">@item.Expire_Date</span>
+                                    </td>
+                                    <td>
+                                        <small>@item.Order_Guid.Substring(0, 8)</small>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        @*<div class="card-footer px-3 border-0 d-flex align-items-center justify-content-between">
+                                <div>
+                                    @Html.PagedListPager(ViewBag.SelectOrderlist, page => Url.Action("AllOrder", new { page }))
+                                </div>
+                                <div class="font-weight-bold small">
+                                    每頁筆數
+                                    <b>@ViewBag.SelectOrderlist.PageSize</b>，共
+                                    <b>@ViewBag.SelectOrderlist.PageCount</b> 頁，當前第
+                                    <b> @ViewBag.SelectOrderlist.PageNumber </b>頁
+                                </div>
+                            </div>*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
