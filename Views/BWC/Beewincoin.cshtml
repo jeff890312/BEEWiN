@@ -1,0 +1,222 @@
+﻿@model BEEWiN.Models.Coin
+<style>
+    .align-self-center li {
+        font-weight: 400;
+        line-height: 2rem;
+    }
+
+    .text-primary {
+        color: #747ed1 !important;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        padding: 2rem 2rem;
+        border: 1px solid rgba(170, 170, 170, 0.7);
+        border-radius: 10px;
+        box-shadow: 3px 3px 5px rgb(121 121 121 / 25%);
+    }
+</style>
+<body>
+    <div class="content-wrapper">
+        <section class="wrapper bg-dark-img">
+            <div class="container pt-10 pb-12 pt-md-14 pb-md-12 text-center">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="display-1 mb-3 text-white">@Model.Name</h1>
+                        <h2 class="text-white">必盈幣認購頁面</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="wrapper wrapper-border">
+            <div class="container py-7 pb-md-16">
+                <!--/.row -->
+                <div class="card mb-10">
+                    <div class="card-body bg-light-team pricing card shadow-lg">
+                        <div class="row" style="justify-content: space-around;">
+                            <!-- /column -->
+                            <div class="col-lg-4 align-self-center">
+                                <figure><img class="img-fluid mb-10 px-8" src="~/Template/Front/image/icons/BEEWiN Coin.png" alt="" /></figure>
+                                <div class="row counter-wrapper gy-6 text-center">
+                                    <div class="col-md-12">
+                                        <p class="counter counter-lg">@Model.Capital_Size.ToString("N0") <small>/ 100,000</small></p>
+                                        <p>已發售 BWC</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-7 align-self-center">
+                                <h3 class="h1 post-title mb-0" style="display:flex; justify-content: space-between;">
+                                    @Model.Name
+                                    @if (Session["Member"] != null)
+                                    {
+                                        <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#testpay">兌幣儲值</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#modal-login">兌幣儲值</a>
+                                    }
+                                </h3>
+                                <hr class="my-8">
+                                <ul class="px-0">
+                                    <li><span class="h4">本期募資目標：</span>100,000 BWC</li>
+                                    <li><span class="h4">認購價格：</span><img style="height:20px" src="~/Template/Front/image/icons/BEEWiN Coin.png" alt="" /> 1BWC : <img style="height:20px" src="~/Template/Front/image/icons/Usdt.svg" /> 1USDT</li>
+                                    <li>
+                                        <span class="h4">專案介紹：</span><i class="uil uil-book-alt"></i><a href="https://beewin.pro/BEEWiN_Whitepaper_v1.0.pdf">白皮書</a><br>
+                                        BEEWiN Coin 簡稱(BWC)，是BEEWiN必盈網推出的平台幣，能夠使用理財商品、購物商城、異業合作、跨國合作等多元平台服務。
+                                        而BWC的誕生，不僅僅只局限於平台使用，未來目標是作為一個國際流通的交易媒介，以及擁有實質購買力的貨幣，並泛用於各個領域上。
+                                    </li>
+                                    <hr class="my-8">
+                                    <li>
+                                        <ul class="progress-list">
+                                            <span class="h4">認購進度：</span>
+                                            <li>
+                                                <div class="progressbar line yellow" data-value="@((Model.Capital_Size/100000)*100)"></div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card bg-white-img mb-10">
+                            <div class="card-body pricing card shadow-lg p-6">
+                                <h3 class="h1 post-title">代幣詳情</h3>
+                                <hr class="d-block d-sm-none my-8">
+                                <ul class="px-6 mb-10" style="line-height:2rem;">
+                                    <li>申購方式：USDT <img style="height:20px" src="~/Template/Front/image/icons/Usdt.svg" /></li>
+                                    <li>第一期申購目標：100,000 BWC</li>
+                                    <li>最低申購門檻：1000 BWC</li>
+                                    <li>鎖倉時間：365天</li>
+                                    <li>回饋年化 7.2%~20%</li>
+                                    <li>鎖倉到期時，BEEWiN承諾將1:1購回，用戶可自行選擇繼續質押或其他用途。</li>
+                                </ul>
+                                @if (Session["Member"] != null)
+                                {
+                                    <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#testpay">兌幣儲值</a>
+                                }
+                                else
+                                {
+                                    <a class="btn btn-primary rounded-pill mb-0 text-nowrap" data-bs-toggle="modal" data-bs-target="#modal-login">兌幣儲值</a>
+                                }
+                            </div>
+                            <!--/.card-body -->
+                        </div>
+                        <!--/.card -->
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card bg-white-img mb-10">
+                            <div class="card-body pricing card shadow-lg p-6 pb-0">
+                                <h3 class="h1 post-title">代幣分配</h3>
+                                <img class="card-img-bottom mb-5 d-none d-sm-block" src="~/Template/Front/image/designcap.jpg" alt="" />
+                                <div class="mb-10 d-block d-sm-none"><img src="~/Template/Front/image/designcap_m.jpg" class="img-fluid"></div>
+                            </div>
+                            <!--/.card-body -->
+                        </div>
+                        <!--/.card -->
+                    </div>
+                    <!-- /column -->
+                </div>
+
+                <!-- /.row -->
+                <div class="card bg-white mb-10">
+                    <div class="card-body pricing card shadow-lg">
+                        <div class="row" style="justify-content: center;">
+                            <!-- /column -->
+                            <img class="card-img-bottom mb-5 d-none d-sm-block" src="~/Template/Front/image/beewin-pic1.png" alt="" />
+                            <div class="mb-10 d-block d-sm-none"><img src="~/Template/Front/image/beewin-pic1_m.png" class="img-fluid"></div>
+                            <!-- /column -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!--/.card-body -->
+                </div>
+            </div>
+            <!-- /.container -->
+        </section>
+        <!-- /.content-wrapper -->
+
+        <div class="progress-wrap">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+            </svg>
+        </div>
+
+    </div>
+
+
+    <div class="modal fade" id="modal-01" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content text-center">
+                <div class="modal-body">
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="row">
+                        <h2>@Model.Name</h2>
+                        <p style="margin-top: 0rem;">申購完成後將會自動鎖倉質押，質押期一年後可選擇延展或賣回，BEEWiN承諾將以1BWC : 1USDT回購，匯兌過程無手續費。</p>
+                        <div class="col-md-10 offset-md-1">
+                            <figure class="mb-6-img pt-3 p-10 pb-0">
+                                <img src="~/Template/Front/image/icons/beewin-coin.png" />
+                            </figure>
+                        </div>
+                        <!-- /column -->
+                    </div>
+
+                    <p class="mb-6-table"><img style="height:20px" src="~/Template/Front/image/icons/BEEWiN Coin.png" alt="" /> 1BWC : <img style="height:20px" src="~/Template/Front/image/icons/Usdt.svg" /> 1USDT</p>
+                    <div class="newsletter-wrapper">
+                        <div class="row">
+                            <div class="col-md-10 offset-md-1-pop">
+                                <!-- Begin Mailchimp Signup Form -->
+                                <div id="mc_embed_signup">
+                                    <form action="@Url.Action("payorder","order")" method="post">
+                                        <div id="mc_embed_signup_scroll">
+                                            <div class="form-group">
+                                                <input type="number" name="amount" value="1000" min="1" required="required" oninput="validity.valid||(value='');" class="form-control" />
+                                                <input type="text" name="symbol" value="@Model.Symbol" required="required" hidden class="form-control" />
+                                            </div>
+                                            <div type="button" class="btn btn-primary-can rounded-pill btn-login w-100 mb-2" data-bs-toggle="modal" data-bs-target="#modal-01" data-dismiss="#modal-01">取消</div>
+                                            @if (Session["Member"] != null)
+                                            {
+                                                <button type="submit" class="btn btn-primary-next rounded-pill btn-login w-100 mb-2">前往付款</button>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="btn btn-primary-next rounded-pill btn-login w-100 mb-2" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modal-login">登入會員</a>
+                                            }
+                                            <div id="mce-responses" class="clear">
+                                                <div class="response" id="mce-error-response" style="display:none">
+                                                </div>
+                                                <div class="response" id="mce-success-response" style="display:none">
+                                                </div>
+                                            </div>
+                                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                                <input type="text" name="b_ddc180777a163e0f9f66ee014_4b1bcfa0bc"
+                                                       tabindex="-1" value="">
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!--End mc_embed_signup-->
+                            </div>
+                            <!-- /.newsletter-wrapper -->
+                        </div>
+                        <!-- /column -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!--/.modal-body -->
+            </div>
+            <!--/.modal-content -->
+        </div>
+        <!--/.modal-dialog -->
+    </div>
+    <!--/.modal -->
+</body>

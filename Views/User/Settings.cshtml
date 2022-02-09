@@ -1,0 +1,103 @@
+﻿@model BEEWiN.Models.Member
+
+<script>
+    var li = document.getElementById("setting");
+    li.classList.add("active");
+</script>
+<body>
+
+    <div class="container-fluid bg-soft">
+        <div class="row">
+            <div class="col-12">
+
+                    <div class="jumbotron">
+                        <h1>資料設定</h1>
+                        <p>
+                            <b>會員 @Session["MemberName"]</b> 您可在此進行基本資料設定，密碼變更及驗證帳號。
+                        </p>
+                        <br />
+                    </div>
+
+                    @using (Html.BeginForm("settings", "user", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-12 col-xl-12">
+                                <div class="card card-body bg-white border-light shadow-sm mb-4">
+                                    <h2 class="h5 mb-4">個人資料</h2>
+                                    <div class="form-horizontal">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="row">                                
+                                            <div class="col-md-6 mb-3 form-group">
+                                                <div>
+                                                    <label>暱稱</label>
+                                                    <div class="col-md-12">
+                                                        @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger required" })*@
+                                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3 form-group">
+                                                <div>
+                                                    <label>帳號</label>
+                                                    <div class="col-md-12">
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3 form-group " style="display:none">
+                                                <div>
+                                                    <label>密碼</label>
+                                                    <div class="col-md-12">
+                                                        @Html.HiddenFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center">
+                                            <div class="col-md-6 mb-3 form-group">
+                                                <div>
+                                                    <label>手機</label>
+                                                    <div class="col-md-12">
+                                                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3 form-group">
+                                                <div>
+                                                    <label>國家</label>
+                                                    <div class="col-md-12">
+                                                        @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @Html.HiddenFor(model => model.Register_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.HiddenFor(model => model.Member_Type, new { htmlAttributes = new { @class = "form-control" } })
+                                            <div class="col-12 mb-3">
+                                                <input type="submit" value="保存" class="btn btn-primary">
+                                                <a class="btn btn-primary" href="@Url.Action("resetpassword", "user")">重設密碼<span class="fas fa-redo ml-2"></span> </a>
+                                            </div>
+                                        </div>
+                                        @if (TempData["ModifyProfileOK"] == "ok")
+                                        {
+                                            <div class="alert alert-success text-white">
+                                                <span class="sidebar-icon"><span class="fas fa-check"></span></span>
+                                                <strong> 完成 !</strong> 個人資料修改成功
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
+</body>
