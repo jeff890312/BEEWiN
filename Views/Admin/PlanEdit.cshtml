@@ -1,0 +1,171 @@
+﻿@model BEEWiN.Models.Plan
+<script>
+    document.getElementById("plan").classList.add("active");
+    document.getElementById("submenu-app2").classList.add("show");
+</script>
+<body>
+    <div class="container-fluid bg-soft">
+        <div class="row">
+            <div class="col-12">
+
+                <main class="content">
+
+                    <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark pl-0 pr-2 pb-0">
+                        <div class="container-fluid px-0">
+                            <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
+                                <div class="d-flex">
+                                </div>
+                                <!-- Navbar links -->
+                                <ul class="navbar-nav align-items-center">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link pt-1 px-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <div class="media d-flex align-items-center">
+                                                @*<img class="user-avatar md-avatar rounded-circle" alt="Image placeholder" src="~/volt-v1.0.1-themesberg/html&css/assets/img/team/profile-picture-3.jpg">*@
+                                                <div class="media-body ml-2 text-dark align-items-center d-none d-lg-block">
+                                                    <span class="mb-0 font-small font-weight-bold">@Session["Admin"] 管理員模式</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="jumbotron">
+                        <h1>理財方案管理編輯</h1>
+                    </div>
+                    @if (TempData["EditOK"] == "ok")
+                    {
+                        <div class="alert alert-success text-white">
+                            <span class="sidebar-icon"><span class="fas fa-check"></span></span>
+                            <strong> 完成 !</strong> 資料修改成功
+                        </div>
+                    }
+
+
+                    <div class="table-settings mb-4">
+
+                        <div class="card card-body border-light shadow-sm table-wrapper table-responsive pt-0">
+                            @using (Html.BeginForm("PlanEdit", "admin", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="row">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.PId)
+
+                                    <div class="form-group">
+                                        <br>
+                                        <label>方案類別</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.PType, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>方案名稱</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.PName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>報酬/年化率</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Rate, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Rate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>風險提示</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Risk, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Risk, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>敘述</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Tips, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Tips, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>申購始日</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Open_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Open_Date, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>申購止日</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Close_Date, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Close_Date, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>期約(日)</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Offering_Day, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Offering_Day, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>淨值/價格</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.PPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.PPrice, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>資金規模</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Capital_Size, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Capital_Size, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>資金上限</label>
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Capital_Object, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Capital_Object, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>方案狀態</label>
+                                        <div class="col-md-10">
+                                            <div class="checkbox">
+                                                @Html.EditorFor(model => model.Plan_Status)
+                                                @Html.ValidationMessageFor(model => model.Plan_Status, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-12 mb-3">
+                                            <input type="submit" value="保存" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</body>

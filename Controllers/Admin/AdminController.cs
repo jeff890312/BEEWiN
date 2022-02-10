@@ -102,5 +102,54 @@ namespace BEEWiN.Controllers.Admin
             ViewBag.SelectMemberlist = members;
             return View("memberlist", "_LayoutAdmin");
         }
+        public ActionResult PlanList(string searchString, int? status = 0)
+        {
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("permissiondenied", "error");
+            }
+            var order = from m in db.Plan
+                        orderby m.Open_Date descending
+                        select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                order = (IOrderedQueryable<Plan>)order.Where(x => x.PId.Contains(searchString));
+            }
+            ViewBag.Selectlist = order;
+            return View("planlist", "_LayoutAdmin");
+        }
+        public ActionResult PlanEdit(string PId)
+        {
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("permissiondenied", "error");
+            }
+            Plan plan = db.Plan.Find(PId);
+            if (PId == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+            if (plan == null)
+            {
+                return HttpNotFound();
+            }
+            return View("planedit", "_LayoutAdmin",plan);
+        }
+        [HttpPost]
+        public ActionResult PlanEdit([Bind(Include = "PId,PType,PName,Rate,Risk,Tips,Open_Date,Close_Date,Offering_Day,PPrice,Capital_Size,Capital_Object,Plan_Status")] Plan plan)
+        {
+            if (Session["Admin"] == null)
+            {
+                return RedirectToAction("permissiondenied", "error");
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(plan).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                TempData["EditOK"] = "ok";
+                return View("planedit", "_LayoutAdmin");
+            }
+            return View("planedit", "_LayoutAdmin");
+        }
     }
 }

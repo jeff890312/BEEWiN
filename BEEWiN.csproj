@@ -2688,6 +2688,8 @@
     <Content Include="Views\User\ResetPassword.cshtml" />
     <Content Include="Views\Account\Verify.cshtml" />
     <Content Include="Views\Account\Welcome.cshtml" />
+    <Content Include="Views\Admin\PlanEdit.cshtml" />
+    <Content Include="Views\Admin\PlanList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

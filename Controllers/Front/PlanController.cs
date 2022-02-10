@@ -19,6 +19,7 @@ namespace BEEWiN.Controllers.Front
             {
                 string email = (Session["Member"] as Member).Email;
                 var member = db.Member.Where(m => m.Email == email).FirstOrDefault();
+                TempData["Balance"] = member.Wallet.Current_Accounts;
                 TempData["Current"] = member.Wallet.Current_Accounts.ToString("N0");
                 TempData["CurrentTWD"] = (member.Wallet.Current_Accounts * 28).ToString("N0");
             }
